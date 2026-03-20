@@ -40,7 +40,6 @@ class WatchlistPage extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        // LEFT SIDE
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -61,8 +60,6 @@ class WatchlistPage extends StatelessWidget {
                             ),
                           ],
                         ),
-
-                        // RIGHT SIDE
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
