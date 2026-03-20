@@ -12,9 +12,11 @@ class WatchlistPage extends StatelessWidget {
     return BlocProvider(
       create: (_) => WatchlistBloc(),
       child: Scaffold(
+        backgroundColor: Colors.black,
         appBar: AppBar(
           title: const Text("Watchlist"),
           backgroundColor: Colors.black,
+          elevation: 0,
         ),
         body: BlocBuilder<WatchlistBloc, WatchlistState>(
           builder: (context, state) {
@@ -26,18 +28,63 @@ class WatchlistPage extends StatelessWidget {
               },
               children: [
                 for (int i = 0; i < state.stocks.length; i++)
-                  ListTile(
+                  Container(
                     key: ValueKey(state.stocks[i].name),
-                    leading: const Icon(Icons.drag_handle),
-                    title: Text(state.stocks[i].name),
-                    subtitle: Text(state.stocks[i].exchange),
-                    trailing: Text(
-                      state.stocks[i].price.toString(),
-                      style: TextStyle(
-                        color: state.stocks[i].change >= 0
-                            ? Colors.green
-                            : Colors.red,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 12, vertical: 14),
+                    decoration: const BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(color: Colors.grey),
                       ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        // LEFT SIDE
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              state.stocks[i].name,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              state.stocks[i].exchange,
+                              style: const TextStyle(
+                                color: Colors.grey,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        // RIGHT SIDE
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              state.stocks[i].price.toString(),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                              ),
+                            ),
+                            Text(
+                              "${state.stocks[i].change}%",
+                              style: TextStyle(
+                                color: state.stocks[i].change >= 0
+                                    ? Colors.green
+                                    : Colors.red,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
               ],
